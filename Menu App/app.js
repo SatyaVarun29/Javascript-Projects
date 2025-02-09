@@ -71,45 +71,23 @@ const menu = [
     img: "./images/item-9.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
+  {
+    id: 10,
+    title: "Bake buddy",
+    category: "dinner",
+    price: 36.99,
+    img: "./images/item-10.jpeg",
+    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+  },
 ];
 
 const sectionMenu = document.querySelector(".section-center");
-const filterbtn = document.querySelectorAll(".filter-btn");
+const btncontainer = document.querySelector(".btn-container");
 
 window.addEventListener("DOMContentLoaded", function () {
-
-const categories=menu.reduce(function(value,item){
-   if(!value.includes(item.category)){
-    value.push(item.category)
-   }
-   return value
-    
-
-
-},['all'])
-console.log(categories);
-
-
-
   
-  // filterbtn.forEach((btn) => {
-  //   btn.addEventListener("click", function (e) {
-  //     const menuCategory = e.currentTarget.dataset.id;
-
-  //     let menufilter = menu.filter(function (item) {
-  //       if (item.category === menuCategory) {
-  //         return item;
-  //       }
-  //     });
-  //     if (menuCategory == "all") {
-  //       displaymenuItems(menu);
-  //     } else {
-  //       displaymenuItems(menufilter);
-  //     }
-  //   });
-  // });
-
   displaymenuItems(menu);
+  displayfilterbtn()
 });
 
 function displaymenuItems(menuItem) {
@@ -131,4 +109,41 @@ function displaymenuItems(menuItem) {
   displaymenu = displaymenu.join("");
 
   sectionMenu.innerHTML = displaymenu;
+}
+
+function displayfilterbtn(){
+  const categories = menu.reduce(
+    function (value, item) {
+      if (!value.includes(item.category)) {
+        value.push(item.category);
+      }
+      return value;
+    },
+    ["all"]
+  );
+  const uniquebtns = categories
+  .map((menubtns) => {
+    return ` <button class="filter-btn" type="button" data-id=${menubtns}>${menubtns}</button>`;
+    })
+    .join("");
+    
+  btncontainer.innerHTML = uniquebtns;
+
+    const filterbtn = document.querySelectorAll(".filter-btn");
+  filterbtn.forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      const menuCategory = e.currentTarget.dataset.id;
+
+      let menufilter = menu.filter(function (item) {
+        if (item.category === menuCategory) {
+          return item;
+        }
+      });
+      if (menuCategory == "all") {
+        displaymenuItems(menu);
+      } else {
+        displaymenuItems(menufilter);
+      }
+    });
+  });
 }
