@@ -1,34 +1,37 @@
 //using selectors inside the element
+const questions = document.querySelectorAll(".question");
 
-
-const questions=document.querySelectorAll('.question')
 questions.forEach((question) => {
-  // console.log(question);
+  console.log(question);
+  
   const btn = question.querySelector(".question-btn");
-
-  btn.addEventListener("click", () => {
-    questions.forEach((item)=>{
-      // console.log(item);
+  btn.addEventListener("click", function () {
+    // console.log(question.classList)
+    questions.forEach((item) => {
+      console.log(item);
       
-if(item!==question){
-  item.classList.remove('show-text')
-}
+      if (item != question) {
+        item.classList.remove("show-text");
+      }
+    });
 
-
-    })
     question.classList.toggle("show-text");
+    
   });
 });
 
 // traversing the dom
-// const btns = document.querySelectorAll(".question-btn");
-// btns.forEach(function (btn) {
-//   btn.addEventListener("click", (e) => {
-//     const answer = e.currentTarget.parentElement.parentElement;
-//     if (!answer.classList.contains("show-text")) {
-//       answer.classList.add("show-text");
-//     } else {
-//       answer.classList.remove("show-text");
+
+// const btns=document.querySelectorAll('.question-btn')
+// btns.forEach((btn)=>{
+//  btn.addEventListener('click',function(e){
+//     const qtn=( e.currentTarget.parentElement.parentElement)
+//     if(!qtn.classList.contains('show-text')){
+//       qtn.classList.add('show-text')
 //     }
-//   });
-// });
+//     else{
+//       qtn.classList.remove('show-text')
+//     }
+
+//  })
+// })
